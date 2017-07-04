@@ -1,0 +1,2 @@
+# mastobot
+Mastodon simple robot

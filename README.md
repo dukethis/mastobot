@@ -20,7 +20,8 @@ $ sudo pip search bs4
 $ sudo pip install [-U] bs4
 </pre>
 
-When an application APP_NAME is created, it is registered on the Mastodon instance APP_BASE.
+When an application APPNAME is created, it is registered on the Mastodon instance APPBASE.
+When the client ID is already existing, it's only login in.
 You can revoke the registration of any app. from your Mastodon account settings.
 
 <h3>Usage:</h3>

@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # coding: UTF-8
-# https://github.com/halcy/Mastodon.py
 """
 + Mastodon Robot:
     - Connect & Log to a specific Mastodon instance (according to the application id credentials)
@@ -26,27 +25,27 @@ from mastodon import Mastodon
 from optparse import OptionParser
 from bs4 import BeautifulSoup
 
-def do_login(APP_NAME,APP_BASE,CID_FILE,LOG_FILE):
+def do_login():
     # Register app - only once!
-    if not os.path.isfile( CID_FILE ):
+    if not os.path.isfile( CIDFILE ):
         try: # Create application
-            print("Creating application %s for Mastodon %s"%(APP_NAME,APP_BASE))
-            Mastodon.create_app(APP_NAME,
+            print("Creating application %s for Mastodon %s"%(APPNAME,APPBASE))
+            Mastodon.create_app(APPNAME,
                                 ['read','write','follow'],
-                                api_base_url=APP_BASE,
-                                to_file=CID_FILE)
+                                api_base_url=APPBASE,
+                                to_file=CIDFILE)
         except Exception as this:
             print( this )
             return
     # Create an application instance
-    bot = Mastodon( client_id=CID_FILE, api_base_url=APP_BASE )
+    bot = Mastodon( client_id=CIDFILE, api_base_url=APPBASE )
     # Get the Mastodon's account login
-    with open(LOG_FILE,"r") as f:
+    with open(LOGFILE,"r") as f:
         LOGIN = f.readlines()
         LOGIN = [ x.strip() for x in LOGIN ]
-        LOG_MAIL = LOGIN[0]                 # 'my_login_email@example.com'
-        LOG_PASS = LOGIN[1]                 # 'incrediblystrongpassword'
-    try: bot.log_in( LOG_MAIL, LOG_PASS )
+        MAIL = LOGIN[0]                 # 'my_login_email@example.com'
+        PASS = LOGIN[1]                 # 'incrediblystrongpassword'
+    try: bot.log_in( MAIL, PASS )
     except Exception as this:
         print("Mastobot was instantiated but login failed")
         print( this )
@@ -93,8 +92,16 @@ def show_status(bot,x):
             this = s['accounts'][0]
     for k,v in this.items():
         print( "%-15s : %s"%(k,v) )
-    
+
+# DEFAULT OPTIONS
+APPNAME="bigtoot"
+APPBASE="https://octodon.social"
+LOGFILE="/home/duke/bot/mastodon/login"
+CIDFILE="/home/duke/bot/mastodon/%s_clientid"%APPNAME
+
+# MAIN PROCESS
 if __name__ == '__main__':
+
     # OPTIONS/ARGUMENTS PARSER:
     OP = OptionParser()
     OP.add_option('-n',dest='notif',help="List last notifications",type='int')
@@ -102,19 +109,17 @@ if __name__ == '__main__':
     OP.add_option('-m',dest='mode',help="0=Home ; 1=Local ; 2=Public",type='int',default=0)
     OP.add_option('-s',dest='status',help="Show account status (with ID or name)")
     # APPLICATION OPTIONS
-    OP.add_option('-b',dest='appbase',help="Mastodon instance base url",default="https://octodon.social")
-    OP.add_option('-x',dest='appname',help="Application instance name",default="bigtoot")
-    OP.add_option('-l',dest='login',help="Application account's login",default="/home/duke/bot/mastodon/login")
+    OP.add_option('-b',dest='appbase',help="Mastodon instance base url",default=APPBASE)
+    OP.add_option('-x',dest='appname',help="Application name",default=APPNAME)
+    OP.add_option('-l',dest='login',help="Application account's login",default=LOGFILE)
     
     opts,args = OP.parse_args()
 
-    CID_FILE="/home/duke/bot/mastodon/%s_clientid"%opts.appname
-    
     # LOG IN MASTODON:
     if args or any(opts.__dict__.values()):
-        bot = do_login(opts.appname,opts.appbase,CID_FILE,opts.login)
+        bot = do_login()
     # PROCESS ACTIONS:
-    if opts.notif:       show_notif(bot,opts.notif)                 # NOTIFICATIONS
+    if   opts.notif:     show_notif(bot,opts.notif)                 # NOTIFICATIONS
     elif opts.timeline:  show_timeline(bot,opts.timeline,opts.mode) # TIMELINE
     elif opts.status:
         for arg in args: show_status(bot,arg)                       # ACCOUNT STATUS

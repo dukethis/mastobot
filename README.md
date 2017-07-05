@@ -1,10 +1,11 @@
 # mastobot
 <h3>Mastodon Application: A CLI tool to grab toots</h3>
 + Mastodon Robot:
-    - Connect & Log to a specific Mastodon instance (according to the application id credentials)
-    - Show your timeline
-    - Show your notifications
-    - Show any account status
+
+    + Connect & Log to a specific Mastodon instance (according to the application id credentials)
+    + Show your timeline
+    + Show your notifications
+    + Show any account status
 
 + With https://github.com/halcy/Mastodon.py
 <pre>

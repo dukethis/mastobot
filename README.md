@@ -1,7 +1,6 @@
 # mastobot
 <h3>Mastodon Application: A CLI tool to grab toots</h3>
 
-* Mastodon Robot:
 + Connect & Login to a specific Mastodon instance (according to the application id credentials)
 + Show your timeline
 + Show your notifications

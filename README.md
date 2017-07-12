@@ -12,8 +12,9 @@
 $ sudo pip search Mastodon.py
 $ sudo pip install [-U] Mastodon.py
 </pre>
-<pre>
+
 + Using https://pypi.python.org/pypi/beautifulsoup4/
+<pre>
 $ sudo pip search bs4
 $ sudo pip install [-U] bs4
 </pre>

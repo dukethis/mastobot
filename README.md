@@ -23,23 +23,25 @@ When an application APPNAME is created, it is registered on the Mastodon instanc
 You can revoke the registration of any application from your Mastodon account settings.
 
 <h3>Usage:</h3>
+
 <pre>
 $ mastobot.py -h
 Usage: mastobot.py [options]
 
 Options:
-  -h, --help            show this help message and exit
-  -n NOTIF, --notif=NOTIF
+   -h, --help            show this help message and exit
+   -n NOTIF, --notif=NOTIF
                         List last notifications
-  -l TIMELINE, --timeline=TIMELINE
+   -l TIMELINE, --timeline=TIMELINE
                         List timeline
-  -m MODE, --mode=MODE  Timeline mode: 0=Home,1=Local,2=Public
-  -s, --status          Show account status (with ID or name)
-  -t, --toot            Toot this
-  -B APPBASE            Mastodon instance base url
-  -X APPNAME            Application name
-  -L LOGIN              Application account's login
-  -R                    Reverse order of results
+   -m MODE, --mode=MODE  Timeline mode: 0=Home,1=Local,2=Public
+   -s, --status          Show account status (with ID or name)
+   -t, --toot            Toot this
+   -B APPBASE            Mastodon instance base url
+   -X APPNAME            Application name
+   -L LOGIN              Application account's login
+   -R                    Reverse order of results
+
 </pre>
 
 Enjoy :-)
